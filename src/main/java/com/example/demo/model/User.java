@@ -13,19 +13,16 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
     private String name;
 
-    @Column(nullable = false, unique = true)
+    @Column(unique = true)
     private String email;
 
-    @Column(nullable = false)
-    private String password; // hashed password
+    private String password; 
 
-    @Column(nullable = false)
-    private String role = "USER"; // default role
+    private String role = "USER"; 
 
-    // Constructors
+   
     public User() {}
 
     public User(String name, String email, String password) {
