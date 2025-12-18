@@ -34,14 +34,14 @@ public class BudgetPlan {
         this.expenseLimit = expenseLimit;
     }
 
-    public void validate() {
-        if (month < 1 || month > 12) {
-            throw new BadRequestException("Invalid month");
-        }
-        if (incomeTarget < 0 || expenseLimit < 0) {
-            throw new BadRequestException("Negative values not allowed");
-        }
-    }
+    // public void validate() {
+    //     if (month < 1 || month > 12) {
+    //         throw new BadRequestException("Invalid month");
+    //     }
+    //     if (incomeTarget < 0 || expenseLimit < 0) {
+    //         throw new BadRequestException("Negative values not allowed");
+    //     }
+    // }
 
     // getters & setters
 }
