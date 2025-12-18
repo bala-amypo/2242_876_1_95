@@ -21,12 +21,9 @@ public class AuthController {
 public AuthResponse register(@RequestBody RegisterRequest request) {
  User user = new User(null,
                      request.getName(),
-
-                                                                                                                            request.getEmail(),
-
-                                                                                                                                            request.getPassword(),
-
-                                                                                                                                                            null);
+                     request.getEmail(),
+                     request.getPassword(),
+                     null);
 
 
 
