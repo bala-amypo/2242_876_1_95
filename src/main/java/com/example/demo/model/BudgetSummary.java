@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-//@Table(name = "budget_summaries")
+@Table(name = "budget_summaries")
 public class BudgetSummary {
 
     public static final String STATUS_UNDER_LIMIT = "UNDER_LIMIT";
