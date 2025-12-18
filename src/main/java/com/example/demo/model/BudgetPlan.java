@@ -1,45 +1,47 @@
+package com.example.demo.model;
+
+import com.example.demo.exception.BadRequestException;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.*;
-import lombok.*;
 
 @Entity
-@Table(
-    name = "budget_plans",
-    uniqueConstraints = {
-        @UniqueConstraint(
-            columnNames = {"user_id", "month", "year"}
-        )
-    }
-)
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
+@Table(name = "budget_plans")
 public class BudgetPlan {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", nullable = false)
+    @ManyToOne
     private User user;
 
-    @Min(value = 1, message = "Month must be between 1 and 12")
-    @Max(value = 12, message = "Month must be between 1 and 12")
-    @Column(nullable = false)
     private Integer month;
-
-    @Min(value = 2000) // optional but recommended
-    @Column(nullable = false)
     private Integer year;
-
-    @PositiveOrZero(message = "Income target must be ≥ 0")
-    @Column(nullable = false)
     private Double incomeTarget;
-
-    @PositiveOrZero(message = "Expense limit must be ≥ 0")
-    @Column(nullable = false)
     private Double expenseLimit;
+
+    @OneToOne(mappedBy = "budgetPlan")
+    private BudgetSummary summary;
+
+    public BudgetPlan() {}
+
+    public BudgetPlan(Long id, User user, Integer month, Integer year,
+                      Double incomeTarget, Double expenseLimit) {
+        this.id = id;
+        this.user = user;
+        this.month = month;
+        this.year = year;
+        this.incomeTarget = incomeTarget;
+        this.expenseLimit = expenseLimit;
+    }
+
+    public void validate() {
+        if (month < 1 || month > 12) {
+            throw new BadRequestException("Invalid month");
+        }
+        if (incomeTarget < 0 || expenseLimit < 0) {
+            throw new BadRequestException("Negative values not allowed");
+        }
+    }
+
+    // getters & setters
 }
