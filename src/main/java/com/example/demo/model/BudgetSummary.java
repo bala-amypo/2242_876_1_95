@@ -4,6 +4,7 @@ import lombok.*;
 
 import java.time.LocalDateTime;
 
+
 @Entity
 @Table(name = "budget_summaries")
 @Getter
@@ -35,7 +36,14 @@ public class BudgetSummary {
 
     @Column(nullable = false, updatable = false)
     private LocalDateTime generatedAt;
+  public enum BudgetStatus {
+        UNDER_LIMIT,
+        OVER_LIMIT
+    }
 
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private BudgetStatus status;
 
     @PrePersist
     @PreUpdate
