@@ -28,23 +28,8 @@ public AuthResponse register(@RequestBody RegisterRequest request) {
                                 request.getEmail(), 
                                 request.getPassword(), 
                                 null); 
-                                                                                   
-
-
-
-                                                                                                                                                                                               User savedUser = userService.register(user); 
-
-
-
-                                                                                                                                                                                                
-
-
-
-                                                                                                                                                                                                        return new AuthResponse( 
-
-
-
-                                                                                                                                                                                                                        null, 
+         User savedUser = userService.register(user); 
+         return new AuthResponse(                                                                                                              null, 
 
 
 
@@ -214,22 +199,12 @@ public AuthResponse register(@RequestBody RegisterRequest request) {
                      request.getEmail(),
                      request.getPassword(),
                      null);
-
-
-
-                                                                                                                                                                    User savedUser = userService.register(user);
-
-
-
-                                                                                                                                                                            return new AuthResponse(
-
-                                                                                                                                                                                                null,
-
-                                                                                                                                                                                                                savedUser.getId(),
-
-                                                                                                                                                                                                                                savedUser.getEmail(),
-
-                                                                                                                                                                                                                                                savedUser.getRole()
+                     
+ User savedUser = userService.register(user);
+ return new AuthResponse(null,
+                         savedUser.getId(),
+                         savedUser.getEmail(),
+                         savedUser.getRole()
 
                                                                                                                                                                             );
 
