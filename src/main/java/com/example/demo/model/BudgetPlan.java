@@ -1,45 +1,54 @@
 import jakarta.persistence.*;
-import jakarta.validation.constraints.*;
+import jakarta.validation.constraints.PositiveOrZero;
 import lombok.*;
 
+import java.time.LocalDateTime;
+
 @Entity
-@Table(
-    name = "budget_plans",
-    uniqueConstraints = {
-        @UniqueConstraint(
-            columnNames = {"user_id", "month", "year"}
-        )
-    }
-)
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class BudgetPlan {
+public class BudgetSummary {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
+    @OneToOne(optional = false, fetch = FetchType.LAZY)
+    @JoinColumn(name = "budget_plan_id", nullable = false, unique = true)
+    private BudgetPlan budgetPlan;
 
-    @Min(value = 1, message = "Month must be between 1 and 12")
-    @Max(value = 12, message = "Month must be between 1 and 12")
+    @PositiveOrZero
     @Column(nullable = false)
-    private Integer month;
+    private Double totalIncome;
 
-    @Min(value = 2000) // optional but recommended
+    @PositiveOrZero
     @Column(nullable = false)
-    private Integer year;
+    private Double totalExpense;
 
-    @PositiveOrZero(message = "Income target must be ≥ 0")
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private Double incomeTarget;
+    private BudgetStatus status;
 
-    @PositiveOrZero(message = "Expense limit must be ≥ 0")
-    @Column(nullable = false)
-    private Double expenseLimit;
+    @Column(nullable = false, updatable = false)
+    private LocalDateTime generatedAt;
+
+    /* ---------------- Lifecycle Hooks ---------------- */
+
+    @PrePersist
+    @PreUpdate
+    private void calculateStatus() {
+        if (totalExpense > budgetPlan.getExpenseLimit()) {
+            this.status = BudgetStatus.OVER_LIMIT;
+        } else {
+            this.status = BudgetStatus.UNDER_LIMIT;
+        }
+    }
+
+    @PrePersist
+    private void onCreate() {
+        this.generatedAt = LocalDateTime.now();
+    }
 }
