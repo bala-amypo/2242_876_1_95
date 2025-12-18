@@ -2,7 +2,6 @@ import jakarta.persistence.*;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "transaction_logs")
 public class TransactionLog {
 
     @Id

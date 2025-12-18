@@ -1,10 +1,7 @@
 import jakarta.persistence.*;
 
 @Entity
-@Table(
-    name = "categories",
-    uniqueConstraints = {
-        @UniqueConstraint(columnNames = "name")
+@Table( uniqueConstraints = {@UniqueConstraint(columnNames = "name")
     }
 )
 public class Category {
@@ -16,9 +13,8 @@ public class Category {
     @Column(unique = true)
     private String name;
 
-    private String type; // INCOME or EXPENSE
+    private String type; 
 
-    // Constructors
     public Category() {}
 
     public Category(String name, String type) {
@@ -26,7 +22,7 @@ public class Category {
         this.type = type;
     }
 
-    // Getters & Setters
+    
     public Long getId() {
         return id;
     }
