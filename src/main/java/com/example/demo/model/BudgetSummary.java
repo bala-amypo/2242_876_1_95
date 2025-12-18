@@ -1,62 +1,43 @@
-import jakarta.persistence.*;
-import jakarta.validation.constraints.PositiveOrZero;
-import lombok.*;
+package com.example.demo.model;
 
+import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
-
 @Entity
-@Table(name = "budget_summaries")
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
+//@Table(name = "budget_summaries")
 public class BudgetSummary {
+
+    public static final String STATUS_UNDER_LIMIT = "UNDER_LIMIT";
+    public static final String STATUS_OVER_LIMIT = "OVER_LIMIT";
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne(optional = false, fetch = FetchType.LAZY)
-    @JoinColumn(name = "budget_plan_id", nullable = false, unique = true)
+    @OneToOne
     private BudgetPlan budgetPlan;
 
-    @PositiveOrZero
-    @Column(nullable = false)
     private Double totalIncome;
-
-    @PositiveOrZero
-    @Column(nullable = false)
     private Double totalExpense;
-
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private BudgetStatus status;
-
-    @Column(nullable = false, updatable = false)
+    private String status;
     private LocalDateTime generatedAt;
-  public enum BudgetStatus {
-        UNDER_LIMIT,
-        OVER_LIMIT
-    }
 
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private BudgetStatus status;
+    public BudgetSummary() {}
 
-    @PrePersist
-    @PreUpdate
-    private void calculateStatus() {
-        if (totalExpense > budgetPlan.getExpenseLimit()) {
-            this.status = BudgetStatus.OVER_LIMIT;
-        } else {
-            this.status = BudgetStatus.UNDER_LIMIT;
-        }
+    public BudgetSummary(Long id, BudgetPlan budgetPlan, Double totalIncome,
+                         Double totalExpense, String status, LocalDateTime generatedAt) {
+        this.id = id;
+        this.budgetPlan = budgetPlan;
+        this.totalIncome = totalIncome;
+        this.totalExpense = totalExpense;
+        this.status = status;
+        this.generatedAt = generatedAt;
     }
 
     @PrePersist
-    private void onCreate() {
+    public void onCreate() {
         this.generatedAt = LocalDateTime.now();
     }
+
+    // getters & setters
 }
