@@ -36,7 +36,6 @@ public class BudgetSummary {
     @Column(nullable = false, updatable = false)
     private LocalDateTime generatedAt;
 
-    /* ---------------- Lifecycle Hooks ---------------- */
 
     @PrePersist
     @PreUpdate
