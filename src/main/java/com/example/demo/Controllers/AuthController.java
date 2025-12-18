@@ -14,21 +14,13 @@ public class AuthController {
     private final JwtTokenProvider jwtTokenProvider;
         public AuthController(UserService userService, AuthenticationManager authenticationManager,JwtTokenProvider jwtTokenProvider) {
              this.userService = userService;
-             this.authenticationManager = authenticationManager;                                                                                               this.jwtTokenProvider = jwtTokenProvider;
-
-                                                                        }
-
-
-
-                                                                            @PostMapping("/register")
-
-                                                                                public AuthResponse register(@RequestBody RegisterRequest request) {
-
-
-
-                                                                                            User user = new User(null,
-                                                                                            )
-                                                                                                            request.getName(),
+             this.authenticationManager = authenticationManager;                                                                                          
+             this.jwtTokenProvider = jwtTokenProvide  
+             }
+@PostMapping("/register")
+public AuthResponse register(@RequestBody RegisterRequest request) {
+ User user = new User(null,
+                     request.getName(),
 
                                                                                                                             request.getEmail(),
 
