@@ -14,24 +14,12 @@ public class CategoryController {
 @PostMapping("/")
 public Category createCategory(@RequestBody Category category) {
     return categoryService.addCategory(category);
-
-                                    }
-
-
-
-                                        @GetMapping("/")
-
-                                            public List<Category> getAllCategories() {
-
-                                                    return categoryService.getAllCategories();
-
-                                                        }
-
-                                                        }
+    }
+@GetMapping("/")
+public List<Category> getAllCategories() {
+        return categoryService.getAllCategories();
+        }   
+        
+ }
 
 
-
-
-                    }
-            }
-}
