@@ -1,35 +1,36 @@
+package com.example.demo.model;
+
+import com.example.demo.exception.BadRequestException;
 import jakarta.persistence.*;
+
 import java.time.LocalDate;
 
 @Entity
+@Table(name = "transaction_logs")
 public class TransactionLog {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
     private User user;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
     private Category category;
 
+    @Column(nullable = false)
     private Double amount;
 
     private String description;
 
+    @Column(nullable = false)
     private LocalDate transactionDate;
 
-    // Constructors
     public TransactionLog() {}
 
-    public TransactionLog(
-            User user,
-            Category category,
-            Double amount,
-            String description,
-            LocalDate transactionDate
-    ) {
+    public TransactionLog(Long id, User user, Category category, Double amount, String description, LocalDate transactionDate) {
+        this.id = id;
         this.user = user;
         this.category = category;
         this.amount = amount;
@@ -37,9 +38,21 @@ public class TransactionLog {
         this.transactionDate = transactionDate;
     }
 
-    // Getters & Setters
+    public void validate() {
+        if (amount == null || amount <= 0) {
+            throw new BadRequestException("Amount must be greater than 0");
+        }
+        if (transactionDate != null && transactionDate.isAfter(LocalDate.now())) {
+            throw new BadRequestException("Transaction date cannot be in the future");
+        }
+    }
+
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public User getUser() {
