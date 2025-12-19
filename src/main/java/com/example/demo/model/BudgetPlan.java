@@ -41,17 +41,17 @@ public class BudgetPlan {
     }
 
    // Business validation;
-    public void validate() {
-        if (month == null || month < 1 || month > 12) {
-            throw new BadRequestException("Invalid month");
-        }
-        if (incomeTarget == null || incomeTarget < 0) {
-            throw new BadRequestException("Income target must be >= 0");
-        }
-        if (expenseLimit == null || expenseLimit < 0) {
-            throw new BadRequestException("Expense limit must be >= 0");
-        }
-    }
+    // public void validate() {
+    //     if (month == null || month < 1 || month > 12) {
+    //         throw new BadRequestException("Invalid month");
+    //     }
+    //     if (incomeTarget == null || incomeTarget < 0) {
+    //         throw new BadRequestException("Income target must be >= 0");
+    //     }
+    //     if (expenseLimit == null || expenseLimit < 0) {
+    //         throw new BadRequestException("Expense limit must be >= 0");
+    //     }
+    // }
 
 
     public Long getId() {
