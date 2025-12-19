@@ -1,6 +1,6 @@
 package com.example.demo.controller; 
 import com.example.demo.dto.*; 
-import com.example.demo.model.User; 
+import com.example.demo.model.*; 
 import com.example.demo.security.JwtTokenProvider; 
 import com.example.demo.service.UserService; 
 import org.springframework.security.authentication.*; 
@@ -39,9 +39,7 @@ public class AuthController {
     } 
 @PostMapping("/login") 
 public AuthResponse login(@RequestBody LoginRequest request) { 
-    Authentication authentication = 
-        authenticationManager.authenticate( 
-            new UsernamePasswordAuthenticationToken(
+    Authentication authentication =  authenticationManager.authenticate( new UsernamePasswordAuthenticationToken(
                 request.getEmail(), 
                 request.getPassword() 
                 ) 
