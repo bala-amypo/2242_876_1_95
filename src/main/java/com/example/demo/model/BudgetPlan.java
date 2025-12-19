@@ -4,7 +4,7 @@ import com.example.demo.exception.BadRequestException;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "budget_plans")
+
 public class BudgetPlan {
 
     @Id
@@ -42,7 +42,7 @@ public class BudgetPlan {
         this.expenseLimit = expenseLimit;
     }
 
-    // Business validation
+    Business validation
     public void validate() {
         if (month == null || month < 1 || month > 12) {
             throw new BadRequestException("Invalid month");
@@ -55,7 +55,6 @@ public class BudgetPlan {
         }
     }
 
-    // ----------- Getters & Setters -----------
 
     public Long getId() {
         return id;
