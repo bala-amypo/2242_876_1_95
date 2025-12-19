@@ -4,7 +4,7 @@ import com.example.demo.exception.BadRequestException;
 import jakarta.persistence.*;
 
 @Entity
-
+@Table(name = "budget_plans")
 public class BudgetPlan {
 
     @Id
@@ -23,11 +23,9 @@ public class BudgetPlan {
     @OneToOne(mappedBy = "budgetPlan")
     private BudgetSummary summary;
 
-    // No-arg constructor
     public BudgetPlan() {
     }
 
-    // Parameterized constructor (order required by tests)
     public BudgetPlan(Long id,
                       User user,
                       Integer month,
