@@ -1,6 +1,6 @@
 package com.example.demo.model;
 
-import com.example.demo.exception.BadRequestException;
+//import com.example.demo.exception.BadRequestException;
 import jakarta.persistence.*;
 
 @Entity
@@ -40,7 +40,7 @@ public class BudgetPlan {
         this.expenseLimit = expenseLimit;
     }
 
-    Business validation
+   // Business validation;
     public void validate() {
         if (month == null || month < 1 || month > 12) {
             throw new BadRequestException("Invalid month");
