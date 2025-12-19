@@ -8,18 +8,19 @@ import java.util.List;
 @RequestMapping("/categories")
 public class CategoryController {
     private final CategoryService categoryService;
-    public CategoryController(CategoryService categoryService) {
-            this.categoryService = categoryService;
-          }
-@PostMapping("/")
-public Category createCategory(@RequestBody Category category) {
-    return categoryService.addCategory(category);
-    }
-@GetMapping("/")
-public List<Category> getAllCategories() {
-        return categoryService.getAllCategories();
-        }   
-        
- }
+        public CategoryController(CategoryService categoryService) {
+                    this.categoryService = categoryService;
+                              }
+                              @PostMapping("/")
+                              public Category createCategory(@RequestBody Category category) {
+                                  return categoryService.addCategory(category);
+                                      }
+                                      @GetMapping("/")
+                                      public List<Category> getAllCategories() {
+                                              return categoryService.getAllCategories();
+                                                      }   
+                                                              
+                                                               }
 
 
+                                                               
