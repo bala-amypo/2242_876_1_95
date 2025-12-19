@@ -1,23 +1,28 @@
 package com.example.demo.controller;
-import com.example.demo.model.Category;
-import com.example.demo.service.CategoryService;
+
+import com.example.demo.model.TransactionLog;
+import com.example.demo.service.TransactionService;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @RestController
-@RequestMapping("/categories")
-public class CategoryController {
-    private final CategoryService categoryService;
-    public CategoryController(CategoryService categoryService) {
-        this.categoryService = categoryService;
+@RequestMapping("/transactions")
+public class TransactionController {
 
+    private final TransactionService transactionService;
+
+    public TransactionController(TransactionService transactionService) {
+        this.transactionService = transactionService;
     }
-    @PostMapping("/")
-    public Category createCategory(@RequestBody Category category) {
-        return categoryService.addCategory(category);
-        }
-    @GetMapping("/")
-    public List<Category> getAllCategories() {
-        return categoryService.getAllCategories();
-        }
-   }
+
+    @PostMapping("/{userId}")
+    public TransactionLog add(@PathVariable Long userId, @RequestBody TransactionLog log) {
+        return transactionService.addTransaction(userId, log);
+    }
+
+    @GetMapping("/user/{userId}")
+    public List<TransactionLog> list(@PathVariable Long userId) {
+        return transactionService.getUserTransactions(userId);
+    }
+}
