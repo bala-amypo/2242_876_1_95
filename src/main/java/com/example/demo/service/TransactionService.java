@@ -4,6 +4,10 @@ import com.example.demo.model.TransactionLog;
 import java.util.List;
 
 public interface TransactionService {
-    TransactionLog addTransaction(Long userId, TransactionLog log);
-    List<TransactionLog> getUserTransactions(Long userId);
+
+    TransactionLog saveTransaction(TransactionLog transaction);
+
+    List<TransactionLog> getAllTransactions();
+
+    List<TransactionLog> getTransactionsByUserId(Long userId);
 }

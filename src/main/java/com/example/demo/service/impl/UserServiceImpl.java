@@ -1,39 +1,26 @@
-// package com.example.demo.service.impl;
+package com.example.demo.service.impl;
 
-// import com.example.demo.exception.BadRequestException;
-// import com.example.demo.model.User;
-// import com.example.demo.repository.UserRepository;
-// import com.example.demo.service.UserService;
-// //import org.springframework.security.crypto.password.PasswordEncoder;
-// import org.springframework.stereotype.Service;
+import com.example.demo.model.User;
+import com.example.demo.repository.UserRepository;
+import com.example.demo.service.UserService;
+import org.springframework.stereotype.Service;
 
-// import java.util.Optional;
+@Service
+public class UserServiceImpl implements UserService {
 
-// @Service
-// public class UserServiceImpl implements UserService {
-//     private final UserRepository userRepository;
-//     //private final PasswordEncoder passwordEncoder;
+    private final UserRepository userRepository;
 
-//     public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder) {
-//         this.userRepository = userRepository;
-//         this.passwordEncoder = passwordEncoder;
-//     }
+    public UserServiceImpl(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
-//     @Override
-//     public User register(User user) {
-//         if (userRepository.existsByEmail(user.getEmail())) {
-//             throw new BadRequestException("Email already registered");
-//         }
-//         user.setPassword(passwordEncoder.encode(user.getPassword()));
-//         if (user.getRole() == null) {
-//             user.setRole("USER");
-//         }
-//         return userRepository.save(user);
-//     }
+    @Override
+    public User saveUser(User user) {
+        return userRepository.save(user);
+    }
 
-//     @Override
-//     public User findByEmail(String email) {
-//         Optional<User> found = userRepository.findByEmail(email);
-//         return found.orElse(null);
-//     }
-// }
+    @Override
+    public User getUserById(Long id) {
+        return userRepository.findById(id).orElse(null);
+    }
+}
