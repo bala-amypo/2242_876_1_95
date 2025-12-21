@@ -11,7 +11,7 @@ public class TransactionLog {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
     @ManyToOne(optional = false)
     private User user;
@@ -29,7 +29,7 @@ public class TransactionLog {
 
     public TransactionLog() {}
 
-    public TransactionLog(int id, User user, Category category, Double amount, String description, LocalDate transactionDate) {
+    public TransactionLog(Long id, User user, Category category, Double amount, String description, LocalDate transactionDate) {
         this.id = id;
         this.user = user;
         this.category = category;
@@ -47,11 +47,11 @@ public class TransactionLog {
         }
     }
 
-    public int getId() {
+    public Longaz getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

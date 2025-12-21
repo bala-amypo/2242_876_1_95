@@ -48,8 +48,8 @@ public class BudgetPlan {
         }
     }
 
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
+    public int getId() { return id; }
+    public void setId(int id) { this.id = id; }
     public User getUser() { return user; }
     public void setUser(User user) { this.user = user; }
     public Integer getMonth() { return month; }
