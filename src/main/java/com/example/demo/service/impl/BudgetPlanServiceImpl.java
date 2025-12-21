@@ -1,37 +1,26 @@
 package com.example.demo.service.impl;
 
-import com.example.demo.exception.BadRequestException;
 import com.example.demo.model.BudgetPlan;
-import com.example.demo.model.User;
 import com.example.demo.repository.BudgetPlanRepository;
-import com.example.demo.repository.UserRepository;
 import com.example.demo.service.BudgetPlanService;
 import org.springframework.stereotype.Service;
 
 @Service
 public class BudgetPlanServiceImpl implements BudgetPlanService {
+
     private final BudgetPlanRepository budgetPlanRepository;
-    private final UserRepository userRepository;
 
-    public BudgetPlanServiceImpl(BudgetPlanRepository budgetPlanRepository, UserRepository userRepository) {
+    public BudgetPlanServiceImpl(BudgetPlanRepository budgetPlanRepository) {
         this.budgetPlanRepository = budgetPlanRepository;
-        this.userRepository = userRepository;
     }
 
     @Override
-    public BudgetPlan createBudgetPlan(Long userId, BudgetPlan plan) {
-        User user = userRepository.findById(userId).orElseThrow(() -> new BadRequestException("User not found"));
-        plan.setUser(user);
-        plan.validate();
-        budgetPlanRepository.findByUserAndMonthAndYear(user, plan.getMonth(), plan.getYear())
-                .ifPresent(existing -> { throw new BadRequestException("Budget plan already exists for this month/year"); });
-        return budgetPlanRepository.save(plan);
+    public BudgetPlan saveBudgetPlan(BudgetPlan budgetPlan) {
+        return budgetPlanRepository.save(budgetPlan);
     }
 
     @Override
-    public BudgetPlan getBudgetPlan(Long userId, Integer month, Integer year) {
-        User user = userRepository.findById(userId).orElseThrow(() -> new BadRequestException("User not found"));
-        return budgetPlanRepository.findByUserAndMonthAndYear(user, month, year)
-                .orElseThrow(() -> new BadRequestException("Budget plan not found"));
+    public BudgetPlan getBudgetPlanById(Long id) {
+        return budgetPlanRepository.findById(id).orElse(null);
     }
 }
