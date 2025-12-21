@@ -27,9 +27,10 @@ public class BudgetPlan {
 
     public BudgetPlan() {}
 
-    public BudgetPlan(Long id, User user, Integer month, Integer year, Double incomeTarget, Double expenseLimit) {
+    public BudgetPlan(Long id,// User user,
+     Integer month, Integer year, Double incomeTarget, Double expenseLimit) {
         this.id = id;
-        this.user = user;
+     //   this.user = user;
         this.month = month;
         this.year = year;
         this.incomeTarget = incomeTarget;
