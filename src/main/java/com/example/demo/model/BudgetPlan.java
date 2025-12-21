@@ -10,8 +10,8 @@ public class BudgetPlan {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-   // @ManyToOne(optional = false)
-    //private User user;
+    @ManyToOne(optional = false)
+    private User user;
 
     @Column(name = "budget_month", nullable = false)
     private Integer month;
@@ -27,10 +27,9 @@ public class BudgetPlan {
 
     public BudgetPlan() {}
 
-    public BudgetPlan(Long id,// User user,
-     Integer month, Integer year, Double incomeTarget, Double expenseLimit) {
+    public BudgetPlan(Long id, User user, Integer month, Integer year, Double incomeTarget, Double expenseLimit) {
         this.id = id;
-     //   this.user = user;
+        this.user = user;
         this.month = month;
         this.year = year;
         this.incomeTarget = incomeTarget;

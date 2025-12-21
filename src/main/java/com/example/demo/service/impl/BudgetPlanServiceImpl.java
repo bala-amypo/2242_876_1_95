@@ -11,11 +11,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class BudgetPlanServiceImpl implements BudgetPlanService {
     private final BudgetPlanRepository budgetPlanRepository;
-   // private final UserRepository userRepository;
+    private final UserRepository userRepository;
 
     public BudgetPlanServiceImpl(BudgetPlanRepository budgetPlanRepository, UserRepository userRepository) {
         this.budgetPlanRepository = budgetPlanRepository;
-       // this.userRepository = userRepository;
+        this.userRepository = userRepository;
     }
 
     @Override
