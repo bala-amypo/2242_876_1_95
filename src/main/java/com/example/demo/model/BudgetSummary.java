@@ -12,7 +12,7 @@ public class BudgetSummary {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
     @OneToOne(optional = false)
     private BudgetPlan budgetPlan;
@@ -31,7 +31,7 @@ public class BudgetSummary {
 
     public BudgetSummary() {}
 
-    public BudgetSummary(int id, BudgetPlan budgetPlan, Double totalIncome, Double totalExpense, String status, LocalDateTime generatedAt) {
+    public BudgetSummary(Long id, BudgetPlan budgetPlan, Double totalIncome, Double totalExpense, String status, LocalDateTime generatedAt) {
         this.id = id;
         this.budgetPlan = budgetPlan;
         this.totalIncome = totalIncome;
@@ -47,8 +47,8 @@ public class BudgetSummary {
         }
     }
 
-    public int getId() { return id; }
-    public void setId(int id) { this.id = id; }
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
     public BudgetPlan getBudgetPlan() { return budgetPlan; }
     public void setBudgetPlan(BudgetPlan budgetPlan) { this.budgetPlan = budgetPlan; }
     public Double getTotalIncome() { return totalIncome; }

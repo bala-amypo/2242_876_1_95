@@ -47,7 +47,7 @@ public class TransactionLog {
         }
     }
 
-    public Longaz getId() {
+    public Long getId() {
         return id;
     }
 

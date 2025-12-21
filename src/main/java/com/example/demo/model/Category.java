@@ -12,7 +12,7 @@ public class Category {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
     @Column(unique = true, nullable = false)
     private String name;
@@ -22,7 +22,7 @@ public class Category {
 
     public Category() {}
 
-    public Category(int id, String name, String type) {
+    public Category(Long id, String name, String type) {
         this.id = id;
         this.name = name;
         this.type = type;
@@ -34,11 +34,11 @@ public class Category {
         }
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

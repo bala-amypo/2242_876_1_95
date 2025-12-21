@@ -8,7 +8,7 @@ import jakarta.persistence.*;
 public class BudgetPlan {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
     @ManyToOne(optional = false)
     private User user;
@@ -27,7 +27,7 @@ public class BudgetPlan {
 
     public BudgetPlan() {}
 
-    public BudgetPlan(int id, User user, Integer month, Integer year, Double incomeTarget, Double expenseLimit) {
+    public BudgetPlan(Long id, User user, Integer month, Integer year, Double incomeTarget, Double expenseLimit) {
         this.id = id;
         this.user = user;
         this.month = month;
@@ -48,8 +48,8 @@ public class BudgetPlan {
         }
     }
 
-    public int getId() { return id; }
-    public void setId(int id) { this.id = id; }
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
     public User getUser() { return user; }
     public void setUser(User user) { this.user = user; }
     public Integer getMonth() { return month; }
