@@ -4,7 +4,7 @@ import com.example.demo.model.BudgetPlan;
 
 public interface BudgetPlanService {
 
-    BudgetPlan saveBudgetPlan(BudgetPlan budgetPlan);
+    BudgetPlan createBudgetPlan(Long userId, BudgetPlan plan);
 
-    BudgetPlan getBudgetPlanById(Long id);
+    BudgetPlan getBudgetPlan(Long userId, Integer month, Integer year);
 }

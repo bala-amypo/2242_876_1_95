@@ -4,7 +4,7 @@ import com.example.demo.model.BudgetSummary;
 
 public interface BudgetSummaryService {
 
-    BudgetSummary saveBudgetSummary(BudgetSummary budgetSummary);
+    BudgetSummary generateSummary(Long budgetPlanId);
 
-    BudgetSummary getBudgetSummaryById(Long id);
+    BudgetSummary getSummary(Long budgetPlanId);
 }

@@ -5,9 +5,7 @@ import java.util.List;
 
 public interface TransactionService {
 
-    TransactionLog saveTransaction(TransactionLog transaction);
+    TransactionLog addTransaction(Long userId, TransactionLog log);
 
-    List<TransactionLog> getAllTransactions();
-
-    List<TransactionLog> getTransactionsByUserId(Long userId);
+    List<TransactionLog> getUserTransactions(Long userId);
 }
