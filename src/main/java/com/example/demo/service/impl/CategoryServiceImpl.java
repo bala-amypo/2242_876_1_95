@@ -1,5 +1,6 @@
 package com.example.demo.service.impl;
 
+import com.example.demo.exception.BadRequestException;
 import com.example.demo.model.Category;
 import com.example.demo.repository.CategoryRepository;
 import com.example.demo.service.CategoryService;
@@ -12,12 +13,20 @@ public class CategoryServiceImpl implements CategoryService {
 
     private final CategoryRepository categoryRepository;
 
+    // Constructor injection ONLY
     public CategoryServiceImpl(CategoryRepository categoryRepository) {
         this.categoryRepository = categoryRepository;
     }
 
     @Override
     public Category addCategory(Category category) {
+
+        if (categoryRepository.existsByName(category.getName())) {
+            throw new BadRequestException("Category already exists");
+        }
+
+        category.validateType();
+
         return categoryRepository.save(category);
     }
 
