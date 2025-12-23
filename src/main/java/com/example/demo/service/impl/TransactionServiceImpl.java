@@ -16,7 +16,6 @@ public class TransactionServiceImpl implements TransactionService {
     private final TransactionLogRepository transactionLogRepository;
     private final UserRepository userRepository;
 
-    // Constructor injection ONLY
     public TransactionServiceImpl(TransactionLogRepository transactionLogRepository,
                                   UserRepository userRepository) {
         this.transactionLogRepository = transactionLogRepository;
