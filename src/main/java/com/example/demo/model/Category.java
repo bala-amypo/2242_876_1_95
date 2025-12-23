@@ -2,6 +2,7 @@ package com.example.demo.model;
 
 import com.example.demo.exception.BadRequestException;
 import jakarta.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "categories")
@@ -14,47 +15,39 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true, nullable = false)
+    @Column(unique = true)
     private String name;
 
-    @Column(nullable = false)
     private String type;
 
-    public Category() {}
+    @OneToMany(mappedBy = "category")
+    private List<TransactionLog> transactionLogs;
 
+    // No-arg constructor
+    public Category() {
+    }
+
+    // Parameterized constructor
     public Category(Long id, String name, String type) {
         this.id = id;
         this.name = name;
         this.type = type;
     }
 
+    // Validation method
     public void validateType() {
-        if (!(TYPE_INCOME.equals(type) || TYPE_EXPENSE.equals(type))) {
+        if (!TYPE_INCOME.equals(type) && !TYPE_EXPENSE.equals(type)) {
             throw new BadRequestException("Invalid category type");
         }
     }
 
-    public Long getId() {
-        return id;
-    }
+    // Getters and Setters
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
+    public String getType() { return type; }
+    public void setType(String type) { this.type = type; }
 }
