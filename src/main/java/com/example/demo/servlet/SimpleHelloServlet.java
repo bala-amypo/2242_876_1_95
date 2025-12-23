@@ -7,20 +7,22 @@ import java.io.IOException;
 
 public class SimpleHelloServlet extends HttpServlet {
 
+    // 🔴 MUST BE PUBLIC (tests call this directly)
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+    public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         resp.setStatus(HttpServletResponse.SC_OK);
         resp.setContentType("text/plain");
         resp.getWriter().write("Hello from Simple Servlet");
     }
 
+    // Optional but safe
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+    public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         resp.setStatus(HttpServletResponse.SC_OK);
     }
 
     @Override
     public String getServletInfo() {
-        return "SimpleHelloServlet information";
+        return "SimpleHelloServlet";
     }
 }
