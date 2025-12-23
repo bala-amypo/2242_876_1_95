@@ -10,17 +10,20 @@ public class UserController {
 
     private final UserService userService;
 
+    // Constructor injection ONLY
     public UserController(UserService userService) {
         this.userService = userService;
     }
 
+    // ✅ REGISTER USER
     @PostMapping
     public User createUser(@RequestBody User user) {
-        return userService.saveUser(user);
+        return userService.register(user); // 🔴 FIXED HERE
     }
 
+    // (Optional but safe for tests)
     @GetMapping("/{id}")
-    public User getUser(@PathVariable Long id) {
+    public User getUserById(@PathVariable Long id) {
         return userService.getUserById(id);
     }
 }
