@@ -17,8 +17,11 @@ public class User {
 
     private String name;
 
-    @Column(unique = true, nullable = false)
-    private String email;
+@Email(message = "Invalid email format")
+@NotBlank(message = "Email is required")
+@Column(unique = true, nullable = false)
+private String email;
+   
 
     private String password;
 
