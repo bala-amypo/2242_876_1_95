@@ -5,7 +5,7 @@ import com.example.demo.service.BudgetPlanService;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/budget-plans")
+@RequestMapping("/budgets")
 public class BudgetPlanController {
 
     private final BudgetPlanService budgetPlanService;
@@ -14,13 +14,20 @@ public class BudgetPlanController {
         this.budgetPlanService = budgetPlanService;
     }
 
-    @PostMapping
-    public BudgetPlan createBudgetPlan(@RequestBody BudgetPlan budgetPlan) {
-        return budgetPlanService.saveBudgetPlan(budgetPlan);
+    @PostMapping("/{userId}")
+    public BudgetPlan createBudgetPlan(
+            @PathVariable Long userId,
+            @RequestBody BudgetPlan plan) {
+
+        return budgetPlanService.createBudgetPlan(userId, plan);
     }
 
-    @GetMapping("/{id}")
-    public BudgetPlan getBudgetPlan(@PathVariable Long id) {
-        return budgetPlanService.getBudgetPlanById(id);
+    @GetMapping("/{userId}/{month}/{year}")
+    public BudgetPlan getBudgetPlan(
+            @PathVariable Long userId,
+            @PathVariable Integer month,
+            @PathVariable Integer year) {
+
+        return budgetPlanService.getBudgetPlan(userId, month, year);
     }
 }

@@ -16,4 +16,47 @@ import org.springframework.web.bind.annotation.*;
 public class AuthController {
 
     private final UserService userService;
-    priv
+    private final AuthenticationManager authenticationManager;
+    private final JwtTokenProvider jwtTokenProvider;
+
+    public AuthController(UserService userService,
+                          AuthenticationManager authenticationManager,
+                          JwtTokenProvider jwtTokenProvider) {
+        this.userService = userService;
+        this.authenticationManager = authenticationManager;
+        this.jwtTokenProvider = jwtTokenProvider;
+    }
+
+    @PostMapping("/register")
+    public User register(@RequestBody RegisterRequest request) {
+        User user = new User(null,
+                request.getName(),
+                request.getEmail(),
+                request.getPassword(),
+                null);
+
+        return userService.register(user);
+    }
+
+    @PostMapping("/login")
+    public AuthResponse login(@RequestBody LoginRequest request) {
+
+        Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(
+                        request.getEmail(),
+                        request.getPassword()
+                )
+        );
+
+        User user = userService.findByEmail(request.getEmail());
+
+        String token = jwtTokenProvider.generateToken(
+                authentication,
+                user.getId(),
+                user.getEmail(),
+                user.getRole()
+        );
+
+        return new AuthResponse(token, user.getId(), user.getEmail(), user.getRole());
+    }
+}

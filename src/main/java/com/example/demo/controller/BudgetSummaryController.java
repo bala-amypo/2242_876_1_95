@@ -5,7 +5,7 @@ import com.example.demo.service.BudgetSummaryService;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/budget-summaries")
+@RequestMapping("/summary")
 public class BudgetSummaryController {
 
     private final BudgetSummaryService budgetSummaryService;
@@ -14,13 +14,13 @@ public class BudgetSummaryController {
         this.budgetSummaryService = budgetSummaryService;
     }
 
-    @PostMapping
-    public BudgetSummary createBudgetSummary(@RequestBody BudgetSummary budgetSummary) {
-        return budgetSummaryService.saveBudgetSummary(budgetSummary);
+    @PostMapping("/generate/{budgetPlanId}")
+    public BudgetSummary generateSummary(@PathVariable Long budgetPlanId) {
+        return budgetSummaryService.generateSummary(budgetPlanId);
     }
 
-    @GetMapping("/{id}")
-    public BudgetSummary getBudgetSummary(@PathVariable Long id) {
-        return budgetSummaryService.getBudgetSummaryById(id);
+    @GetMapping("/{budgetPlanId}")
+    public BudgetSummary getSummary(@PathVariable Long budgetPlanId) {
+        return budgetSummaryService.getSummary(budgetPlanId);
     }
 }

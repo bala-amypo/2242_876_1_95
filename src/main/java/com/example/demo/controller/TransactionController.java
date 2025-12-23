@@ -16,18 +16,16 @@ public class TransactionController {
         this.transactionService = transactionService;
     }
 
-    @PostMapping
-    public TransactionLog createTransaction(@RequestBody TransactionLog transaction) {
-        return transactionService.saveTransaction(transaction);
-    }
+    @PostMapping("/{userId}")
+    public TransactionLog addTransaction(
+            @PathVariable Long userId,
+            @RequestBody TransactionLog log) {
 
-    @GetMapping
-    public List<TransactionLog> getAllTransactions() {
-        return transactionService.getAllTransactions();
+        return transactionService.addTransaction(userId, log);
     }
 
     @GetMapping("/user/{userId}")
-    public List<TransactionLog> getTransactionsByUserId(@PathVariable Long userId) {
-        return transactionService.getTransactionsByUserId(userId);
+    public List<TransactionLog> getUserTransactions(@PathVariable Long userId) {
+        return transactionService.getUserTransactions(userId);
     }
 }
