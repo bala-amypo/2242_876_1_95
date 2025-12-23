@@ -8,6 +8,6 @@ public interface UserService {
 
     User findByEmail(String email);
 
-    // 🔴 REQUIRED BY TESTS
+
     User getUserById(Long id);
 }
