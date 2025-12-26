@@ -46,8 +46,8 @@ public class SecurityConfig {
 
     @Bean
     public JwtTokenProvider jwtTokenProvider(
-            @Value("${jwt.secret}") String secret,
-            @Value("${jwt.validity-ms}") long validityInMs) {
+            @Value("${jwt.secret:change-this-secret-to-a-very-long-32+chars-secret-key!}") String secret,
+            @Value("${jwt.validity-ms:3600000}") long validityInMs) {
         return new JwtTokenProvider(secret, validityInMs);
     }
 }
