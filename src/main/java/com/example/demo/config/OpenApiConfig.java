@@ -24,7 +24,7 @@ public class OpenApiConfig {
                 .bearerFormat("JWT");
 
         Server localServer = new Server()
-                .url("https://9127.32procr.amypo.ai")
+                .url("https://9132.32procr.amypo.ai/")
                 .description("Local Server");
 
         return new OpenAPI()
