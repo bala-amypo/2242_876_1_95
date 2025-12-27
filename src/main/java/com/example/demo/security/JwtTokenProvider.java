@@ -14,13 +14,11 @@ public class JwtTokenProvider {
     private final Key secretKey;
     private final long validityInMs;
 
-    // Constructor used in tests
     public JwtTokenProvider(String secret, long validityInMs) {
         this.secretKey = Keys.hmacShaKeyFor(secret.getBytes());
         this.validityInMs = validityInMs;
     }
 
-    // Default constructor for Spring
     public JwtTokenProvider() {
         this.secretKey = Keys.hmacShaKeyFor(
                 "mysecretkeymysecretkeymysecretkey12".getBytes());
