@@ -7,7 +7,6 @@ import java.io.IOException;
 
 public class SimpleHelloServlet extends HttpServlet {
 
-    // 🔴 MUST BE PUBLIC (tests call this directly)
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         resp.setStatus(HttpServletResponse.SC_OK);
@@ -15,7 +14,6 @@ public class SimpleHelloServlet extends HttpServlet {
         resp.getWriter().write("Hello from Simple Servlet");
     }
 
-    // Optional but safe
     @Override
     public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         resp.setStatus(HttpServletResponse.SC_OK);
